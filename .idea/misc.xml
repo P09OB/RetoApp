@@ -5,7 +5,11 @@
       <map>
         <entry key="app/src/main/res/drawable/button.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.23603438030516752" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10242062848151219" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20730407540041468" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.11679827011983081" />
+        <entry key="app/src/main/res/layout/fragment_new_publication.xml" value="0.2044743876668254" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/menu/menuapp.xml" value="0.2907692307692308" />
       </map>
     </option>
   </component>
