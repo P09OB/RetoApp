@@ -3,11 +3,14 @@
 
     <item
         android:id="@+id/homeitem"
+        android:icon="@drawable/home"
         android:title="Home" />
     <item
         android:id="@+id/publicationitem"
-        android:title="Publicar" />
+        android:icon="@drawable/add"
+        android:title="Publicación" />
     <item
         android:id="@+id/profileitem"
+        android:icon="@drawable/userother"
         android:title="Mi perfil" />
 </menu>

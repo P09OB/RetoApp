@@ -1,6 +1,8 @@
 package com.example.reto1
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -21,7 +23,6 @@ class Login : AppCompatActivity() {
 
         val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),::onResult)
 
-
         binding.loginButton.setOnClickListener {
 
             var user = binding.userET.text.toString()
@@ -30,9 +31,9 @@ class Login : AppCompatActivity() {
             if((user.equals("alfa@gmail.com") && password.equals("aplicacionesmoviles"))
                 || (user.equals("beta@gmail.com")  && password.equals("aplicacionesmoviles"))){
 
-                val intent = Intent(this, MainActivity::class.java).apply {
-                    putExtra("user",user)
-                }
+
+                val intent = Intent(this, MainActivity::class.java)
+
                 launcher.launch(intent)
 
             } else {

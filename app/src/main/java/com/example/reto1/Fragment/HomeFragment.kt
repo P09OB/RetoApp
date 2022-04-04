@@ -1,31 +1,58 @@
 package com.example.reto1.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.reto1.Post
+import com.example.reto1.PostsAdapter
 import com.example.reto1.R
+import com.example.reto1.databinding.FragmentHomeBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), NewPublicationFragment.onNewPostListener{
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    private val adapter = PostsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater,container,false)
+        val view = binding.root
+
+        //Recrear el estado
+        val postRecycler = binding.postRecycler
+        postRecycler.setHasFixedSize(true)
+        postRecycler.layoutManager = LinearLayoutManager(activity)
+        postRecycler.adapter = adapter
+
+        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance() =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
+        fun newInstance() = HomeFragment()
     }
+
+    override fun onNewPost(post: Post) {
+        val newpost = Post(UUID.randomUUID().toString(),post.description, post.photo,post.date,post.city)
+        adapter.adapterPost(newpost)
+
+    }
+
 }

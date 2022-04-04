@@ -1,11 +1,24 @@
 package com.example.reto1
 
-data class Post (
+import android.graphics.Bitmap
 
-    var description: String,
-    var photo: String,
-    var date: String,
-    var city: String
+class Post {
+     var id:String
+     var description: String
+     var photo: Bitmap
+     var date: String
+     var city: String
+
+     constructor(id:String, description:String,photo:Bitmap, date:String, city: String){
+         this.id = id
+         this.description = description
+         this.photo = photo
+         this.date = date
+         this.city = city
+     }
+
+ }
 
 
-)
+
+

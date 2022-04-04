@@ -10,20 +10,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import com.example.reto1.Post
 import com.example.reto1.R
 import com.example.reto1.UtilDomi
 import com.example.reto1.databinding.FragmentNewPublicationBinding
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class NewPublicationFragment : Fragment() {
 
+
+
     private lateinit var binding: FragmentNewPublicationBinding
 
+    private lateinit var city : String
+    private lateinit var bitmapGalerry : Bitmap
+
     private var file:File? = null
+
+    //Listener
+
+    var listener: onNewPostListener? = null
 
 
     override fun onCreateView(
@@ -39,6 +53,8 @@ class NewPublicationFragment : Fragment() {
 
         val camLauncer = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(), ::onCameraResult)
+
+        val cities = resources.getStringArray(R.array.cities)
 
         binding.galeryBtt.setOnClickListener {
             val i = Intent(Intent.ACTION_GET_CONTENT)
@@ -56,6 +72,26 @@ class NewPublicationFragment : Fragment() {
             camLauncer.launch(i)
         }
 
+        binding.citySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                city = cities[position]
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+
+        binding.addBtn.setOnClickListener {
+            val text = binding.newdescriptionET.text.toString()
+            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+            val currentDate = sdf.format(Date())
+            val newpost = Post(UUID.randomUUID().toString(),text, bitmapGalerry,currentDate,city)
+
+            listener?.let {
+                it.onNewPost(newpost)
+            }
+        }
+
         return binding.root
     }
 
@@ -63,19 +99,23 @@ class NewPublicationFragment : Fragment() {
         val uri = activityResult?.data?.data
         val path = UtilDomi.getPath(requireContext(),uri!!)
         val bitmap = BitmapFactory.decodeFile(path)
-        val scaledBitmap = Bitmap.createScaledBitmap(
+        bitmapGalerry = Bitmap.createScaledBitmap(
             bitmap,
             bitmap.width/2,
             bitmap.height/2,
             true
         )
+        //Log.e(">>>>>>",""+scaledBitmap )
+
+        binding.postimage.setImageBitmap(bitmapGalerry)
+
 
     }
 
     private fun onCameraResult(activityResult: ActivityResult ) {
         val bitmap = BitmapFactory.decodeFile(file?.path)
         val aspectRation = (bitmap.width.toFloat())/bitmap.height
-        val scaleBitmap =
+        bitmapGalerry =
             Bitmap.createScaledBitmap(
                 bitmap,
                 300,
@@ -83,6 +123,14 @@ class NewPublicationFragment : Fragment() {
                 true
             )
 
+
+        binding.postimage.setImageBitmap(bitmapGalerry)
+
+
+    }
+
+    interface onNewPostListener{
+        fun onNewPost(post:Post)
     }
 
         companion object {

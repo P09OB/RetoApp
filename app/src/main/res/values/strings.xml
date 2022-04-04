@@ -2,4 +2,14 @@
     <string name="app_name">SocialApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="cities">
+        <item>Bogotá</item>
+        <item>Medellín</item>
+        <item>Cali</item>
+        <item>Barranquilla</item>
+        <item>Cartagena de Indias</item>
+        <item>Bucaramanga</item>
+    </string-array>
+
 </resources>

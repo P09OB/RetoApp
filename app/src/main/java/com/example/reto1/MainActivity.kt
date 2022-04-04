@@ -32,6 +32,11 @@ class MainActivity : AppCompatActivity() {
         newPublicationFragment = NewPublicationFragment.newInstance()
         profileFragment = ProfileFragment.newInstance()
 
+        newPublicationFragment.listener = homeFragment
+
+        showFragment(homeFragment)
+
+
         binding.navigator.setOnItemSelectedListener { menuItem ->
 
             if(menuItem.itemId == R.id.homeitem){

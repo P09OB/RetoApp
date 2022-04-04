@@ -4,31 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".Login">
 
     <EditText
         android:id="@+id/passwordEt"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/input"
         android:ems="10"
+        android:fontFamily="@font/inter_medium"
         android:hint="Contraseña"
         android:inputType="textPassword"
+        android:paddingStart="24dp"
+        android:textColor="@color/white"
+        android:textColorHint="#8B8B8B"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="188dp"
-        android:layout_height="wrap_content"
+        android:layout_width="320dp"
+        android:layout_height="317dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/userET"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/socialapp" />
+        app:srcCompat="@drawable/logo" />
 
     <Button
         android:id="@+id/loginButton"
@@ -38,8 +45,11 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="96dp"
         android:background="@drawable/button"
-        android:backgroundTint="@color/purple_500"
-        android:text="Iniciar Sesión"
+        android:backgroundTint="@color/purple_200"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Iniciar"
+        android:textAllCaps="false"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -47,13 +57,19 @@
     <EditText
         android:id="@+id/userET"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/input"
         android:ems="10"
+        android:fontFamily="@font/inter_medium"
         android:hint="Usuario"
         android:inputType="textPersonName"
+        android:paddingStart="24dp"
+        android:textColor="@color/white"
+        android:textColorHint="#8B8B8B"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/passwordEt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
