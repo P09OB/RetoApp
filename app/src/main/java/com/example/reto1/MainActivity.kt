@@ -82,7 +82,13 @@ class MainActivity : AppCompatActivity(), ProfileFragment.onUserListener {
         if(!active){
             val intent = Intent(this, Login::class.java)
             launcher.launch(intent)
+            val sharedPreference =  getSharedPreferences("datos",Context.MODE_PRIVATE)
+            var editor = sharedPreference.edit()
+            editor.putBoolean("mode",active)
+            editor.commit()
         }
+
+
     }
 
     private fun onResult(activityResult: ActivityResult) {
@@ -92,6 +98,7 @@ class MainActivity : AppCompatActivity(), ProfileFragment.onUserListener {
     override fun onUserListener(active: Boolean) {
         this.modeUser = active
         user(active,launcher)
+
     }
 
 
