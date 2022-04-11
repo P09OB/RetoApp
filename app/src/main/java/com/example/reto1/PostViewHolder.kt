@@ -15,6 +15,8 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var daterow: TextView = itemView.findViewById(R.id.daterow)
     var cityrow: TextView = itemView.findViewById(R.id.cityrow)
     var imagerow: ImageView = itemView.findViewById(R.id.imagerow)
+    var userNamerow: TextView = itemView.findViewById(R.id.userNamerow)
+    var photorow : ImageView = itemView.findViewById(R.id.photoUser)
 
 
     //State

@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import com.example.reto1.Post
 import com.example.reto1.R
+import com.example.reto1.User
 import com.example.reto1.UtilDomi
 import com.example.reto1.databinding.FragmentNewPublicationBinding
 import java.io.File
@@ -24,21 +25,20 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class NewPublicationFragment : Fragment() {
+class NewPublicationFragment : Fragment(), ProfileFragment.OnUserDataChangedListener {
 
 
 
     private lateinit var binding: FragmentNewPublicationBinding
-
     private lateinit var city : String
+    lateinit var userName : String
     private lateinit var bitmapGalerry : Bitmap
-
     private var file:File? = null
+    private lateinit var user : User
+    private  var userRegister : Boolean = false
 
     //Listener
-
     var listener: onNewPostListener? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,10 +56,16 @@ class NewPublicationFragment : Fragment() {
 
         val cities = resources.getStringArray(R.array.cities)
 
+        if(!userRegister){
+            userName = requireActivity().intent.extras?.getString("username").toString()
+            user = User(userName,"alfa@gmail.com",null)
+            userRegister =true
+        }
         binding.galeryBtt.setOnClickListener {
             val i = Intent(Intent.ACTION_GET_CONTENT)
             i.type = "image/*"
             launcher.launch(i)
+
         }
 
         binding.cameraBtt.setOnClickListener {
@@ -77,19 +83,23 @@ class NewPublicationFragment : Fragment() {
                 city = cities[position]
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
         }
 
+        val nameUser = user.name
         binding.addBtn.setOnClickListener {
             val text = binding.newdescriptionET.text.toString()
-            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm")
             val currentDate = sdf.format(Date())
-            val newpost = Post(UUID.randomUUID().toString(),text, bitmapGalerry,currentDate,city)
+            val newpost = Post(UUID.randomUUID().toString(),nameUser,user.photo,text, bitmapGalerry,currentDate,city)
 
             listener?.let {
                 it.onNewPost(newpost)
             }
+
+            binding.newdescriptionET.setText("")
+
+            Toast.makeText(context,"Publicado",Toast.LENGTH_LONG).show()
         }
 
         return binding.root
@@ -105,11 +115,7 @@ class NewPublicationFragment : Fragment() {
             bitmap.height/2,
             true
         )
-        //Log.e(">>>>>>",""+scaledBitmap )
-
         binding.postimage.setImageBitmap(bitmapGalerry)
-
-
     }
 
     private fun onCameraResult(activityResult: ActivityResult ) {
@@ -126,20 +132,22 @@ class NewPublicationFragment : Fragment() {
 
         binding.postimage.setImageBitmap(bitmapGalerry)
 
-
     }
 
     interface onNewPostListener{
         fun onNewPost(post:Post)
     }
 
+    override fun onUserDataChanged(user: User) {
+        this.user = user
+        userRegister = true
+    }
+
         companion object {
 
         @JvmStatic
-        fun newInstance() = NewPublicationFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
+        fun newInstance() = NewPublicationFragment()
     }
+
+
 }

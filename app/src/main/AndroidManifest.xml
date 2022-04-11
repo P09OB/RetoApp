@@ -16,23 +16,25 @@
         android:theme="@style/Theme.Reto1">
         <activity
             android:name=".Login"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
 
         <provider
             android:authorities="com.example.reto1"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
-        <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/paths"/>
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/paths"/>
         </provider>
         <meta-data
             android:name="preloaded_fonts"

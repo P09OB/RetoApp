@@ -23,7 +23,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/nofoundimage" />
 
         <TextView
             android:id="@+id/userNamerow"
@@ -33,6 +33,7 @@
             android:layout_marginTop="16dp"
             android:text="TextView"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/photoUser"
             app:layout_constraintTop_toTopOf="@+id/photoUser" />
 

@@ -25,6 +25,8 @@ class PostsAdapter: RecyclerView.Adapter<PostViewHolder>() {
         holder.daterow.text = post.date
         holder.cityrow.text = post.city
         holder.imagerow.setImageBitmap(post.photo)
+        holder.userNamerow.text = post.nameUser
+        holder.photorow.setImageBitmap(post.photoUser)
 
 
     }
@@ -36,5 +38,6 @@ class PostsAdapter: RecyclerView.Adapter<PostViewHolder>() {
     override fun getItemCount(): Int {
         return posts.size
     }
+
 
 }
